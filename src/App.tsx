@@ -2,8 +2,8 @@ import { useState } from "react";
 import Expenses from "./Expenses";
 import ExpenseFilter from "./ExpenseFilter";
 import ExpenseForm from "./ExpenseForm";
-import UsersList from "./UsersList";
 import TodosList from "./TodosList";
+import Posts from "./Posts";
 
 export const categories = ["Utility", "Electric", "Grocery", "Others"];
 
@@ -41,7 +41,8 @@ function App() {
         />
       </div>
       <hr />
-      <TodosList />
+      {/* <TodosList /> */}
+      <Posts />
       <hr />
     </>
   );

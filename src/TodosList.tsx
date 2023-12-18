@@ -1,21 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-interface Todo {
-  id: number;
-  title: string;
-}
+import useTodo from "./hooks/useTodo";
 
 const TodosList = () => {
-  const fetchTodos = () =>
-    axios
-      .get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
-      .then((resp) => resp.data);
+  const { data: todos, error, isLoading } = useTodo();
 
-  const { data: todos } = useQuery({
-    queryKey: ["todos"],
-    queryFn: fetchTodos,
-  });
+  if (isLoading)
+    return <div className="spinner-border text-secondary" role="status"></div>;
+  if (error) return <p className="text-danger">{error.message}</p>;
 
   return (
     <>
