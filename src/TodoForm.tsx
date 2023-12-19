@@ -13,7 +13,9 @@ const TodoForm = () => {
     formState: { errors },
   } = useForm<Todo>();
 
-  const addTodo = useMutation({
+  // handling error with mutation by apply generic type argument to useMutation
+  //
+  const addTodo = useMutation<Todo, Error, Todo>({
     mutationFn: (todo: Todo) =>
       axios
         .post<Todo>("https://jsonplaceholder.typicode.com/todos", todo)
@@ -22,7 +24,7 @@ const TodoForm = () => {
       //   console.log(receivedTodo);
       // can see update in Todos because we are using pagination with
       // dummy API so cache Key is provide of User's Posts
-      queryClient.setQueryData<Todo[]>(["posts"], (todos) => [
+      queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
         receivedTodo,
         ...(todos || []),
       ]);
@@ -31,13 +33,16 @@ const TodoForm = () => {
 
   const onSubmitTodo = (data: Todo) => {
     addTodo.mutate({
-      id: 0,
+      id: 1,
       title: data.title,
     });
   };
 
   return (
     <>
+      {addTodo.error && (
+        <div className="col-6 alert alert-danger">{addTodo.error.message}</div>
+      )}
       <form className="row mb-3" onSubmit={handleSubmit(onSubmitTodo)}>
         <div className="col">
           <input
@@ -51,7 +56,9 @@ const TodoForm = () => {
           )}
         </div>
         <div className="col">
-          <button className="btn btn-primary">Add</button>
+          <button disabled={addTodo.isPending} className="btn btn-primary">
+            {addTodo.isPending ? "Adding..." : "Add"}
+          </button>
         </div>
       </form>
     </>
