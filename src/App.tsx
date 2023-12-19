@@ -42,7 +42,7 @@ function App() {
       </div>
       <hr />
       <TodosList />
-      {/* <Posts /> */}
+      <Posts />
       <hr />
     </>
   );

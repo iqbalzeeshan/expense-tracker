@@ -74,35 +74,38 @@ const UsersList = () => {
   };
 
   return (
-    <ul className="list-group">
-      {isLoading && <div className="spinner-border"></div>}
-      {error && <p className="text-danger">{error}</p>}
-      <button className="btn btn-primary" onClick={() => addUser()}>
-        Add
-      </button>
-      {users.map((user) => (
-        <li
-          className="list-group-item d-flex justify-content-between"
-          key={user.id}
-        >
-          {user.name}
-          <div>
-            <button
-              className="btn btn-outline-danger mx-1"
-              onClick={() => deleteUser(user)}
-            >
-              Delete
-            </button>
-            <button
-              className="btn btn-outline-secondary"
-              onClick={() => updatedUser(user)}
-            >
-              Update
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <>
+      <h3>User Post</h3>
+      <ul className="list-group">
+        {isLoading && <div className="spinner-border"></div>}
+        {error && <p className="text-danger">{error}</p>}
+        <button className="btn btn-primary" onClick={() => addUser()}>
+          Add
+        </button>
+        {users.map((user) => (
+          <li
+            className="list-group-item d-flex justify-content-between"
+            key={user.id}
+          >
+            {user.name}
+            <div>
+              <button
+                className="btn btn-outline-danger mx-1"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+              <button
+                className="btn btn-outline-secondary"
+                onClick={() => updatedUser(user)}
+              >
+                Update
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

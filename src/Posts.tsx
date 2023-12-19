@@ -10,6 +10,8 @@ const Posts = () => {
   if (error) return <p className="text-danger">{error.message}</p>;
   return (
     <>
+      <hr />
+      <h3 className="ms-3">Users Posts</h3>
       <select
         className="form-select"
         onChange={(event) => setUserId(parseInt(event.target.value))}
