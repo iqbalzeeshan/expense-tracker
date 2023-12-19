@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useTodo from "./hooks/useTodo";
+import TodoForm from "./TodoForm";
 
 const TodosList = () => {
   const pageSize = 10;
@@ -13,6 +14,7 @@ const TodosList = () => {
   return (
     <>
       <h3>Todo List</h3>
+      <TodoForm />
       <ul className="list-group">
         {todos?.map((todo) => (
           <li key={todo.id} className="list-group-item">
